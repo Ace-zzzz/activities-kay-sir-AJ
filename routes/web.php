@@ -48,6 +48,10 @@ Route::group(['prefix' => '/admin'], function()
     Route::get('/blogs', [BlogsController::class, 'index'])->name('blogs');
     Route::get('/get-blogs', [BlogsController::class, 'getBlogsData']);
     Route::get('/insert-blogs', [BlogsController::class, 'insertdata']);
+    Route::get('/update', [BlogsController::class, 'updateBlog']);
+    Route::get('/getCategory', [BlogsController::class, 'getCategory']);
+    Route::get('/getModel', [BlogsController::class, 'getBlogModel']);
+    Route::get('/insertUsingModel', [BlogsController::class, 'insertUsingModel']);
     
     Route::fallback(function()
     {

@@ -17,6 +17,7 @@ class BlogFactory extends Factory
     public function definition(): array
     {
         return [
+            'category_id' => fake()->randomElement([1,2,3,4]),
             'title' => fake()->colorName(),
             'description' => fake()->sentence(),
             'status' => fake()->randomElement([1,0]),
