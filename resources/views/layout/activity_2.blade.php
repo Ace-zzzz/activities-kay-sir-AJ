@@ -9,7 +9,7 @@
 </head>
 <body> 
     <div class="row border bg-warning border-black">
-        <div class = "col-lg-8 mt-2">
+        <div class = "col-lg-8 zzmt-2">
         <h1>BRAND</h1>
         </div>
         
