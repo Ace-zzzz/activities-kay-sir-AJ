@@ -15,10 +15,13 @@ return new class extends Migration
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Category::class);
+            $table->string('type')->nullable();
+            $table->integer('author_id', unsigned: true);
             $table->string('title');
             $table->longText('description');
             $table->integer('status');
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

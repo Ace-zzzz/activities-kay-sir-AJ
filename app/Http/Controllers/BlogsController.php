@@ -76,4 +76,84 @@ class BlogsController extends Controller
 
        return $blog;
     }
+
+    public function modelSample()
+    {
+
+        // SELECT * FROM blogs;
+        // $blogs = Blog::all();
+
+        // SELECT * FROM blogs WHERE id = 60;
+
+        // $blog::Blog::findOrFail($id);
+        // $title = "Title: ". $blog->title . " Description: ". $blog->description
+
+        // $blog = Blog::where('status', '1')->get();
+
+        // return $blog;
+        
+        // $blog = Blog::where('status', '!=', '1')
+        //             -> where('category_id', '2')
+        //             ->get();
+
+        // $post = new Blog();
+        // $post->title = "Blog1";
+        // $post->description = "Description Blog1";
+        // $post->status = 0;
+        // $post->category_id = 3;
+        // $post->author_id = 1;
+
+        // $post->save();
+
+        // $post = Blog::find($id);
+        // $post->title = $title;
+
+        // $post->save();
+
+        // $post = Blog::insert([
+        //     [
+        //         'title' => 'Sample123',
+        //         'description' => 'SampleDescription',
+        //         'status' => 0,
+        //         'category_id' => 2,
+        //         'author_id' => 1
+        //     ],
+        //     [
+        //         'title' => 'Sample123',
+        //         'description' => 'SampleDescription',
+        //         'status' => 0,
+        //         'category_id' => 2,
+        //         'author_id' => 1
+        //     ],
+        //     [
+        //         'title' => 'Sample123',
+        //         'description' => 'SampleDescription',
+        //         'status' => 0,
+        //         'category_id' => 2,
+        //         'author_id' => 1
+        //     ],
+        // ]);
+
+        // $post = Blog::where('status', '!=', 1)
+        //             ->where('category_id', 2)
+        //             ->update([
+        //                 'status' => '1'
+        //             ]);
+
+        // $post = Blog::find(78)->delete();
+
+        // // All data not deleted
+        // $post = Blog::all();
+
+        // aLL DATA REGARDLESS IF DELETED
+        // $post = Blog::withTrashed()->get();
+
+        // // aLL DATA REGARDLESS IF DELETED
+        // $post = Blog::onlyTrashed()->get();
+
+        // $post = Blog::withTrashed()->find(170)->restore();
+        // $post = Blog::withTrashed()->find(78)->forceDelete();
+
+        // return $post;
+    }
 }

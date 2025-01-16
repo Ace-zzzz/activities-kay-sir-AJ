@@ -19,6 +19,7 @@ class BlogFactory extends Factory
         return [
             'category_id' => fake()->randomElement([1,2,3,4]),
             'title' => fake()->colorName(),
+            'author_id' => fake()->randomElement([1,2,3,5]),
             'description' => fake()->sentence(),
             'status' => fake()->randomElement([1,0]),
         ];

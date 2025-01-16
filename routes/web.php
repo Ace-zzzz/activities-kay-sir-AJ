@@ -52,6 +52,8 @@ Route::group(['prefix' => '/admin'], function()
     Route::get('/getCategory', [BlogsController::class, 'getCategory']);
     Route::get('/getModel', [BlogsController::class, 'getBlogModel']);
     Route::get('/insertUsingModel', [BlogsController::class, 'insertUsingModel']);
+
+    Route::get('/model-sample/{id}/{title}', [BlogsController::class, 'modelSample'])->name('blog.modelSample');
     
     Route::fallback(function()
     {
