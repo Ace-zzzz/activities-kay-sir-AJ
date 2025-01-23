@@ -55,7 +55,8 @@ Route::group(['prefix' => '/admin'], function()
     Route::get('/insertUsingModel', [BlogsController::class, 'insertUsingModel']);
 
     Route::get('/data', [BlogToController::class, 'data']);
-    Route::get('/index', [BlogToController::class, 'index']);
+    Route::get('/index', [BlogToController::class, 'index'])->name('index');
+    Route::post('/index', [BlogToController::class, 'store'])->name('store');
 
     Route::get('/model-sample/{id}/{title}', [BlogsController::class, 'modelSample'])->name('blog.modelSample');
     

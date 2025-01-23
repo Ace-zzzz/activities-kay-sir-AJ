@@ -19,10 +19,16 @@ class BlogToController extends Controller
         return view('common.dropDown', compact('blogs', 'categories'));
     }
 
-    public function data()
+    public function store(Request $request)
     {
-        $category = Blog::with('category')->get();
-        $category = Blog::with('category')->find(2);
-        return $category;
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'category_id' => 'required'
+        ]);
+
+        Blog::create($validatedData);
+
+        return redirect()->route('index')->with('success', 'Blog created successfully.');
     }
 }

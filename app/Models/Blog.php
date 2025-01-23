@@ -11,11 +11,11 @@ class Blog extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $guarded = ['description'];
-    protected $hidden  = ['description'];
+    // protected $guarded = ['description'];
+    // protected $hidden  = ['description'];
 
     public function category(): BelongsTo
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsTo(Category::class);
     }
 }

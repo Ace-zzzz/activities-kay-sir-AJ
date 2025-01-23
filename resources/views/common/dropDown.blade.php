@@ -4,7 +4,7 @@
 
 <style>
     body {
-        background-color: #0d1f4b; 
+        background-color: red; 
         background-image: url('{{ URL('images/1344914.jpeg') }}'); 
         background-size: cover; 
         background-position: center; 
@@ -20,12 +20,6 @@
         border-radius: 10px;
         border: 2px solid #80d6ff;
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5); 
-    }
-
-    .form-container h1 {
-        text-align: center;
-        color: #80d6ff;
-        margin-bottom: 20px;
     }
 
     form label {
@@ -84,23 +78,33 @@
         margin-bottom: 20px;
     }
 
-    .blogs-list table {
+    .scrollable-table {
+        max-height: 300px; /* Adjust height as needed */
+        overflow-y: scroll; /* Enables vertical scrolling */
+        border: 1px solid #80d6ff;
+    }
+
+    .scrollable-table table {
         width: 100%;
         border-collapse: collapse;
     }
 
-    .blogs-list th, .blogs-list td {
+    .scrollable-table th,
+    .scrollable-table td {
         padding: 10px;
         border: 1px solid #80d6ff;
         text-align: left;
     }
 
-    .blogs-list th {
+    .scrollable-table th {
         background-color: #00aaff;
         color: white;
+        position: sticky;
+        top: 0; /* Keeps table headers visible while scrolling */
+        z-index: 1;
     }
 
-    .blogs-list td {
+    .scrollable-table td {
         background-color: rgba(13, 31, 75, 0.9);
         color: #ffffff;
     }
@@ -108,8 +112,8 @@
 
 <div class="container">
     <div class="form-container">
-        <h1>Create Blog</h1>
-        <form method="POST" action=" ">
+        <h1 style="text-align: center; color: #80d6ff;">Create Blog</h1>
+        <form id="createBlogForm" method="POST">
             @csrf
             <label for="title">Title:</label>
             <input type="text" name="title" id="title" value="{{ old('title') }}" required>
@@ -123,7 +127,7 @@
             <select name="category_id" id="category_id" required>
                 <option value="">Select a category</option>
                 @foreach ($categories as $category)
-                    <option value="{{ $category->id }}"> {{ $category->name }}  </option>
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
             </select>
             @error('category_id') <p>{{ $message }}</p> @enderror
@@ -134,25 +138,76 @@
 
     <div class="blogs-list">
         <h2>Saved Blogs</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Category</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($blogs as $blog)
+        <div class="scrollable-table">
+            <table>
+                <thead>
                     <tr>
-                        <td>{{ $blog->title }}</td>
-                        <td>{{ $blog->description }}</td>
-                        <td>{{ $blog->category->name }}</td>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Created At</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach ($blogs as $blog)
+                        <tr>
+                            <td>{{ $blog->title }}</td>
+                            <td>{{ $blog->description }}</td>
+                            <td>{{ $blog->category->name ?? 'N/A' }}</td>
+                            <td>{{ $blog->created_at }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
+
+<script type= "module">
+    const form = "#createBlogForm";
+
+    $(function(){
+        store();
+    });
+
+    function store() {
+    $(form).on('submit', function(event) {
+        event.preventDefault();
+        $.ajax({
+            url: "{{ route('store') }}",
+            method: 'POST',
+            data: new FormData(this),
+            dataType: 'JSON',
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                if (response.status === 'success') {
+                    alert('Blog created successfully');
+                    
+                    // Add the new blog entry to the top of the table
+                    const newRow = `
+                        <tr>
+                            <td>${response.data.title}</td>
+                            <td>${response.data.description}</td>
+                            <td>${response.data.category_name || 'N/A'}</td>
+                            <td>${response.data.created_at}</td>
+                        </tr>`;
+                    $('tbody').prepend(newRow);
+
+                    // Clear the form fields
+                    $(form)[0].reset();
+                } else {
+                    alert('Failed to create blog');
+                }
+            },
+            error: function(xhr) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+}
+
+</script>
 
 @endsection
