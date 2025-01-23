@@ -2,11 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
- */
 class BlogFactory extends Factory
 {
     /**
@@ -17,11 +15,11 @@ class BlogFactory extends Factory
     public function definition(): array
     {
         return [
-            'category_id' => fake()->randomElement([1,2,3,4]),
-            'title' => fake()->colorName(),
-            'author_id' => fake()->randomElement([1,2,3,5]),
-            'description' => fake()->sentence(),
-            'status' => fake()->randomElement([1,0]),
+            'category_id' => Category::inRandomOrder()->first()->id,
+            'title' => $this->faker->colorName(),
+            'author_id' => $this->faker->randomElement([1, 2, 3, 5]),
+            'description' => $this->faker->sentence(),
+            'status' => $this->faker->randomElement([1, 0]),
         ];
-    } 
+    }
 }

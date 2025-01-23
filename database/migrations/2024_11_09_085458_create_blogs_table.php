@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Category::class);
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->string('type')->nullable();
             $table->integer('author_id', unsigned: true);
             $table->string('title');

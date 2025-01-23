@@ -9,7 +9,7 @@
                         <img src="{{ Vite::asset('resources/images/eatingCat.png')}}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title fw-bold">{{ $blog->title}} </h5>
-                            <p class="card-text"> Category {{ $blog->category->name  }} </p>
+                            {{-- <p class="card-text"> Category {{ $blog->category->name  }} </p> --}}
                             <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
@@ -18,7 +18,7 @@
                     <img src="{{ Vite::asset('resources/images/eatingCat.png')}}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title fw-bold">{{ $blog->title}} </h5>
-                        <p class="card-text"> Category {{ $blog->category->name }} </p>
+                        {{-- <p class="card-text"> Category {{ $blog->category->name }} </p> --}}
                     </div>
                 </div>
                 @endif

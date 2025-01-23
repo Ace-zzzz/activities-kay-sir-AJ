@@ -42,9 +42,9 @@ Route::group(['prefix' => '/admin'], function()
         return $id . " " . $name;
     })->name('settingsPage'); 
 
-    Route::get('/login', [LoginController::class, 'loginPage'])->name('login');
+    Route::get('/login', [LoginController::class,  'loginPage'])->name('login');
     Route::post('/login', [LoginController::class, 'loginSubmit'])->name('login.submit');
-    Route::get('/go', [LoginController::class, 'apiData']);
+    Route::get('/go', [LoginController::class,     'apiData']);
 
     Route::get('/blogs', [BlogsController::class, 'index'])->name('blogs');
     Route::get('/get-blogs', [BlogsController::class, 'getBlogsData']);
@@ -55,6 +55,7 @@ Route::group(['prefix' => '/admin'], function()
     Route::get('/insertUsingModel', [BlogsController::class, 'insertUsingModel']);
 
     Route::get('/data', [BlogToController::class, 'data']);
+    Route::get('/index', [BlogToController::class, 'index']);
 
     Route::get('/model-sample/{id}/{title}', [BlogsController::class, 'modelSample'])->name('blog.modelSample');
     
