@@ -3,6 +3,7 @@
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\BlogToController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
@@ -52,6 +53,8 @@ Route::group(['prefix' => '/admin'], function()
     Route::get('/getCategory', [BlogsController::class, 'getCategory']);
     Route::get('/getModel', [BlogsController::class, 'getBlogModel']);
     Route::get('/insertUsingModel', [BlogsController::class, 'insertUsingModel']);
+
+    Route::get('/data', [BlogToController::class, 'data']);
 
     Route::get('/model-sample/{id}/{title}', [BlogsController::class, 'modelSample'])->name('blog.modelSample');
     
