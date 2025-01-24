@@ -11,10 +11,7 @@ Route::group(['prefix' => '/admin'], function()
 {
     Route::resource('/home1', HomeController::class);
 
-    Route::get('/home', function() 
-    {
-        return view('common.home');
-    })->name('home');
+    Route::get('/home', [BlogsController::class, 'homePage'])->name('home');
 
     Route::get('/about', function()
     {
@@ -45,6 +42,9 @@ Route::group(['prefix' => '/admin'], function()
     Route::post('/login', [LoginController::class, 'loginSubmit'])->name('login.submit');
     Route::get('/go', [LoginController::class, 'apiData']);
 
+    // ACTIVITY 4 ROUTE
+     Route::get('/home', [BlogsController::class, 'homePage'])->name('home');
+    //
     Route::get('/blogs', [BlogsController::class, 'index'])->name('blogs');
     Route::get('/get-blogs', [BlogsController::class, 'getBlogsData']);
     Route::get('/insert-blogs', [BlogsController::class, 'insertdata']);

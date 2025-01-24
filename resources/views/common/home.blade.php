@@ -1,7 +1,7 @@
 @extends('layout.main-master')
 
 @section('content')
-<div id="carouselExampleFade" class="carousel slide carousel-fade mx-3 my-3">
+{{-- <div id="carouselExampleFade" class="carousel slide carousel-fade mx-3 my-3">
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img src="{{ Vite::asset('resources/images/cat.png') }}" 
@@ -215,6 +215,39 @@
                 </div>
             </div>
         </div>
+    </div>
+</div> --}}
+
+<div class="d-flex justify-content-center align-items-center" style="height: 100vh; background-color: #f8f9fa;">
+    <div class="card p-4 shadow-sm" style="max-width: 500px; width: 100%; border-radius: 16px; background-color: #ffffff;">
+        <form>
+            <!-- Dropdown -->
+            <div class="dropdown mb-4">
+                <button class="btn btn-primary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select Category
+                </button>
+                <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Sports</a>
+                    <a class="dropdown-item" href="#">Education</a>
+                    <a class="dropdown-item" href="#">Entertainment</a>
+                </div>
+            </div>
+
+            <!-- Title Input -->
+            <div class="form-group mb-4">
+                <label for="exampleInputTitle">Title</label>
+                <input type="text" class="form-control" id="exampleInputTitle" placeholder="Enter Title">
+            </div>
+
+            <!-- Description Input -->
+            <div class="form-group mb-4">
+                <label for="exampleInputDescription">Description</label>
+                <textarea class="form-control" id="exampleInputDescription" placeholder="Enter Description" rows="4"></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-success btn-block">Submit</button>
+        </form>
     </div>
 </div>
 

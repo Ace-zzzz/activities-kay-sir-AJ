@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Log;
 
 class BlogsController extends Controller
 {
+    public function homePage()
+    {
+        return view('common.home');
+    }
+
     public function index()
     {
         Log::debug("===========> Start debug");
