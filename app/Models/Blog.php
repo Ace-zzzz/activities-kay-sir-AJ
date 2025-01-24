@@ -9,11 +9,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Blog extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
 
-    protected $guarded = ['description'];
-    protected $hidden  = ['description'];
+    // protected $guarded = ['description'];
+    // protected $hidden  = ['description'];
 
     public function category(): BelongsTo
     {

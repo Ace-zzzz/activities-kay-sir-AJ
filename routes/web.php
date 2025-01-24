@@ -3,6 +3,7 @@
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\BlogToController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
@@ -38,9 +39,9 @@ Route::group(['prefix' => '/admin'], function()
         return $id . " " . $name;
     })->name('settingsPage'); 
 
-    Route::get('/login', [LoginController::class, 'loginPage'])->name('login');
+    Route::get('/login', [LoginController::class,  'loginPage'])->name('login');
     Route::post('/login', [LoginController::class, 'loginSubmit'])->name('login.submit');
-    Route::get('/go', [LoginController::class, 'apiData']);
+    Route::get('/go', [LoginController::class,     'apiData']);
 
     // ACTIVITY 4 ROUTE
      Route::get('/home', [BlogsController::class, 'homePage'])->name('home');
@@ -52,6 +53,10 @@ Route::group(['prefix' => '/admin'], function()
     Route::get('/getCategory', [BlogsController::class, 'getCategory']);
     Route::get('/getModel', [BlogsController::class, 'getBlogModel']);
     Route::get('/insertUsingModel', [BlogsController::class, 'insertUsingModel']);
+
+    Route::get('/data', [BlogToController::class, 'data']);
+    Route::get('/index', [BlogToController::class, 'index'])->name('index');
+    Route::post('/index', [BlogToController::class, 'store'])->name('store');
 
     Route::get('/model-sample/{id}/{title}', [BlogsController::class, 'modelSample'])->name('blog.modelSample');
     
