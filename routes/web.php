@@ -6,7 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BlogToController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'welcome');
+//Route::view('/', 'welcome');
 
 Route::group(['prefix' => '/admin'], function()
 {
@@ -55,8 +55,6 @@ Route::group(['prefix' => '/admin'], function()
     Route::get('/insertUsingModel', [BlogsController::class, 'insertUsingModel']);
 
     Route::get('/data', [BlogToController::class, 'data']);
-    Route::get('/index', [BlogToController::class, 'index'])->name('index');
-    Route::post('/index', [BlogToController::class, 'store'])->name('store');
 
     Route::get('/model-sample/{id}/{title}', [BlogsController::class, 'modelSample'])->name('blog.modelSample');
     
@@ -66,4 +64,19 @@ Route::group(['prefix' => '/admin'], function()
     });
 });
 
+Route::group(['middleware' => 'guest', 'prefix' => '/'], function(){
+    Route::get('/register', [LoginController::class, 'register'])->name('register');
+    Route::post('/register', [LoginController::class, 'registerPost'])->name('register.create');
 
+    Route::get('/', [LoginController::class, 'login'])->name('login');
+    Route::post('/', [LoginController::class, 'loginPost'])->name('login.submit');
+});
+
+Route::group(['middleware' => ['custom.auth']], function(){ 
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+});
+
+Route::group(['prefix' => 'blog', 'middleware' => 'custom.auth'], function(){
+    Route::get('/index', [BlogToController::class, 'index'])->name('index.create');
+    Route::post('/index', [BlogToController::class, 'store'])->name('store');
+});
